@@ -5,17 +5,21 @@ import (
 	"net/http"
 )
 
+func Home(w http.ResponseWriter,r *http.Request)  {
+	
+	fmt.Fprintf(w,"This is the home page.")
+
+}
+
+func About(w http.ResponseWriter,r *http.Request)  {
+	fmt.Fprintf(w,"Welcome to the about page")
+}
+
 func main() {
 
-	// fmt.Println("Hello world")
-	http.HandleFunc("/",func(w http.ResponseWriter, r *http.Request) {
-		n, err := fmt.Fprintf(w,"Hello world")
-		if (err != nil) {
-			fmt.Println("err")
-		}
+	http.HandleFunc("/",Home)
 
-		fmt.Println(fmt.Sprintf("Number of bytes written : %d",n))
-	})
+	http.HandleFunc("/about",About)
 
 	http.ListenAndServe(":8080",nil)
 
